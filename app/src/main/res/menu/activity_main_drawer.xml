@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_listmusic"
+            android:icon="@drawable/listmusic"
+            android:title="Play list" />
+        <item
+            android:id="@+id/nav_favorites"
+            android:icon="@drawable/star"
+            android:title="Favorites" />
+        <item
+            android:id="@+id/nav_change_theme"
+            android:icon="@drawable/changetheme"
+            android:title="Theme Color" />
+        <!--<item-->
+        <!--android:id="@+id/nav_slideshow"-->
+        <!--android:icon="@drawable/ic_menu_slideshow"-->
+        <!--android:title="Slideshow" />-->
+
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_menu_share"
+                android:title="Share Facebook" />
+            <item
+                android:id="@+id/nav_send"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:icon="@drawable/mail"
+                android:title="Send Feedback" />
+            <item
+                android:id="@+id/nav_about_app"
+                android:icon="@drawable/infomationapp"
+                android:title="About" />
+            <item
+                android:id="@+id/nav_exit"
+                android:icon="@drawable/exit"
+                android:title="Exit" />
+        </menu>
+    </item>
+
+</menu>
