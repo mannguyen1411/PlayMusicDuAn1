@@ -25,31 +25,35 @@ public class PlayMusicActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_music);
         addControls();
+//Try catch fix lỗi force close khi không tìm thấy file nhạc
+        try {
+            final ArrayList<File> mySongs = findSongs(Environment.getExternalStorageDirectory());
 
-        final ArrayList<File> mySongs = findSongs(Environment.getExternalStorageDirectory());
-        items = new String[mySongs.size()];
-        for (int i = 0; i < mySongs.size(); i++) {
-           // toast(mySongs.get(i).getName().toString());
-            items[i] = mySongs.get(i).getName().toString().replace(".mp3","").replace(".wav","");
-        }
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.listsong_layout, R.id.textView2, items);
-        lv.setAdapter(adapter);
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                startActivity(new Intent(getApplication(), Controller.class).putExtra("pos", position).putExtra("songlist", mySongs));
+            items = new String[mySongs.size()];
+            for (int i = 0; i < mySongs.size(); i++) {
+                // toast(mySongs.get(i).getName().toString());
+                items[i] = mySongs.get(i).getName().toString().replace(".mp3", "").replace(".wav", "");
             }
-        });
+
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.listsong_layout, R.id.textView2, items);
+            lv.setAdapter(adapter);
+            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    startActivity(new Intent(getApplication(), Controller.class).putExtra("pos", position).putExtra("songlist", mySongs).putExtra("title",mySongs.get(position).getName()));
+                }
+            });
+        } catch (Exception e){
+            Toast.makeText(getApplicationContext(),"Không tìm thấy file nhạc",Toast.LENGTH_SHORT).show();
+        }
     }
+
 
     private void addControls() {
         lv = (ListView) findViewById(R.id.lvPlaylist);
     }
 
-    private void addEvents() {
 
-    }
 
     public ArrayList<File> findSongs(File root) {
         ArrayList<File> al = new ArrayList<File>();

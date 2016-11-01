@@ -14,6 +14,11 @@
             android:id="@+id/nav_change_theme"
             android:icon="@drawable/changetheme"
             android:title="Theme Color" />
+
+        <item
+            android:id="@+id/nav_change_AE"
+            android:icon="@drawable/changelanguage"
+            android:title="Change Language" />
         <!--<item-->
         <!--android:id="@+id/nav_slideshow"-->
         <!--android:icon="@drawable/ic_menu_slideshow"-->

@@ -15,6 +15,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
@@ -31,6 +32,8 @@ public class Controller extends AppCompatActivity implements View.OnClickListene
     Uri u;
     Thread updateSeeBar;
     Animation animation;
+    String titleSong;
+    TextView tvTitleSong;
 
 
 
@@ -72,6 +75,9 @@ public class Controller extends AppCompatActivity implements View.OnClickListene
         Bundle b = i.getExtras();
         mySongs = (ArrayList) b.getParcelableArrayList("songlist");
         position = b.getInt("pos", 0);
+        titleSong=b.getString("title","Không tìm thấy tên bài hát");
+        String shrTitle=titleSong.replace(".mp3","");
+        tvTitleSong.setText(shrTitle);
 
         u = Uri.parse(mySongs.get(position).toString());
         mp = MediaPlayer.create(getApplicationContext(), u);
@@ -108,6 +114,8 @@ public class Controller extends AppCompatActivity implements View.OnClickListene
         btnNext = (ImageButton) findViewById(R.id.btnNext);
         sb = (SeekBar) findViewById(R.id.seekBar);
         imageView = (ImageView)findViewById(R.id.imageCd);
+        tvTitleSong=(TextView)findViewById(R.id.tvTitleSong);
+
     }
 
     private void addEvents() {
@@ -134,11 +142,11 @@ public class Controller extends AppCompatActivity implements View.OnClickListene
 
                 if (mp.isPlaying()) {
 
-                    btnPlay.setImageResource(R.drawable.ic_menu_manage);
+                    btnPlay.setImageResource(android.R.drawable.ic_media_play);
                     mp.pause();
                     imageView.clearAnimation();
                 } else {
-                    btnPlay.setImageResource(R.drawable.ic_menu_send);
+                    btnPlay.setImageResource(android.R.drawable.ic_media_pause);
                     mp.start();
                     Clockwise();
 
