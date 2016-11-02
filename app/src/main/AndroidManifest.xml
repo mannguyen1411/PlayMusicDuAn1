@@ -27,7 +27,7 @@
         </activity>
         <activity
             android:name=".PlayMusicActivity"
-            android:label="Danh sách nhạc"
+            android:label="@string/title_activity_Listmusic"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".Controller"
@@ -43,7 +43,7 @@
             android:name=".MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".FeedbackActivity" android:parentActivityName=".MainActivity" android:label="Gửi phản hồi"></activity>
+        <activity android:name=".FeedbackActivity" android:parentActivityName=".MainActivity" android:label="@string/title_activity_Feedback"></activity>
     </application>
 
 </manifest>

@@ -7,6 +7,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <string name="text_header">Music is magic</string>
     <string name="reload">Reload</string>
     <string name="scan">Scan</string>
     <string name="share">Share</string>
@@ -24,6 +25,14 @@
     <string name="loading">Loading</string>
     <string name="wait">Wait a second</string>
     <string name="favourite">Favourite</string>
+    <string name="cancel">Cancel</string>
+    <string name="select">Save</string>
+    <string name="restart">Restart to apply </string>
+    <string name="dialogtitle">Choose language</string>
+    <string name="line">Custom</string>
+    <string name="title_activity_Feedback">Send Feedback</string>
+    <string name="title_activity_Listmusic">List Music</string>
+
 
     <string name="menu_Japan">Japan</string>
     <string name="menu_VietNam">VietNam</string>

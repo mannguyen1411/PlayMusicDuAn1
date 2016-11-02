@@ -34,8 +34,8 @@ public class FeedbackActivity extends AppCompatActivity {
         webViewFeedback.setWebViewClient(new WebViewClient(){
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
-                try {progressDialogFeedback.setTitle("Loading");
-                    progressDialogFeedback.setMessage("Đang tải trang");
+                try {progressDialogFeedback.setTitle("Please wait !!!");
+                    progressDialogFeedback.setMessage("Process loading ...");
                     progressDialogFeedback.setIndeterminate(true);
                     progressDialogFeedback.setCancelable(true);
                     progressDialogFeedback.setCanceledOnTouchOutside(true);

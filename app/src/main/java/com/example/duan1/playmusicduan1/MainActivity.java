@@ -4,11 +4,13 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
+import android.util.DisplayMetrics;
 import android.view.ContextMenu;
 import android.view.MenuInflater;
 import android.view.View;
@@ -24,6 +26,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
+
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
 import com.facebook.share.model.ShareLinkContent;
@@ -42,6 +45,7 @@ public class MainActivity extends AppCompatActivity
     ShareLinkContent content;
     AlertDialog dialog;
     Button button;
+    Locale mylocale ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,8 +60,6 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        button=(Button)findViewById(R.id.buttontest);
-        registerForContextMenu(button);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -74,7 +76,6 @@ public class MainActivity extends AppCompatActivity
                 .setContentTitle("Ứng dụng nghe nhạc Clast Music")
                 .setContentDescription("Hãy cài đặt và sử dụng ứng dụng nghe nhạc Clast Music, simple")
                 .build();
-
 
 
     }
@@ -130,7 +131,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_share) {
             ShareDialog.show(MainActivity.this, content);
         } else if (id == R.id.nav_send) {
-            Intent i =new Intent(MainActivity.this,FeedbackActivity.class);
+            Intent i = new Intent(MainActivity.this, FeedbackActivity.class);
             startActivity(i);
         } else if (id == R.id.nav_about_app) {
 
@@ -145,35 +146,33 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-
-
-    @Override
-    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-        super.onCreateContextMenu(menu, v, menuInfo);
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.contextmenu_change_language, menu);
-    }
-
-    @Override
-    public boolean onContextItemSelected(MenuItem item) {
-
-        switch (item.getItemId()){
-            case R.id.menu_English:
-                break;
-            case R.id.menu_France:
-                break;
-            case R.id.menu_Janpan:
-                break;
-            case R.id.menu_VietNam:
-                break;
-        }
-        return super.onContextItemSelected(item);
-    }
+//    @Override
+//    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+//        super.onCreateContextMenu(menu, v, menuInfo);
+//        MenuInflater inflater = getMenuInflater();
+//        inflater.inflate(R.menu.contextmenu_change_language, menu);
+//    }
+//
+//    @Override
+//    public boolean onContextItemSelected(MenuItem item) {
+//
+//        switch (item.getItemId()) {
+//            case R.id.menu_English:
+//                break;
+//            case R.id.menu_France:
+//                break;
+//            case R.id.menu_Janpan:
+//                break;
+//            case R.id.menu_VietNam:
+//                break;
+//        }
+//        return super.onContextItemSelected(item);
+//    }
 
     private void addControls() {
         btnListMusic = (ImageView) findViewById(R.id.btnlistMusic);
-        viewPager=(ViewPager)findViewById(R.id.mainSlider);
-        customSlider=new CustomSlider(this);
+        viewPager = (ViewPager) findViewById(R.id.mainSlider);
+        customSlider = new CustomSlider(this);
         viewPager.setAdapter(customSlider);
     }
 
@@ -195,23 +194,29 @@ public class MainActivity extends AppCompatActivity
     public AlertDialog onCreateDialogSingleChoice() {
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        final CharSequence[] array = {"English", "Vietnam", "Korea"};
+        final CharSequence[] array = {"Vietnam", "English", "France", "Japan"};
         AlertDialog.Builder builder1 = builder.setTitle(R.string.changelang).setSingleChoiceItems(array, 0, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 switch (which) {
                     case 0:
-                        Toast.makeText(getApplicationContext(), "English", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Vietnam", Toast.LENGTH_SHORT).show();
+                        setLocal("vi");
                         break;
                     case 1:
-                        Toast.makeText(getApplicationContext(), "Vietnam", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "English", Toast.LENGTH_SHORT).show();
+                        setLocal("en");
                         break;
                     case 2:
-                        Toast.makeText(getApplicationContext(), "Korea", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "France", Toast.LENGTH_SHORT).show();
+                        break;
+                    case 3:
+                        Toast.makeText(getApplicationContext(), "Japan", Toast.LENGTH_SHORT).show();
                         break;
 
                 }
             }
+
         })
                 .setPositiveButton(R.string.select, new DialogInterface.OnClickListener() {
                     @Override
@@ -226,6 +231,18 @@ public class MainActivity extends AppCompatActivity
                 });
 
         return builder.create();
+    }
+
+    // set information local in device and refresh app
+    private void setLocal(String language) {
+        mylocale = new Locale(language);
+        Resources res = getResources();
+        DisplayMetrics dm = res.getDisplayMetrics();
+        Configuration conf = res.getConfiguration();
+        conf.locale =mylocale;
+        res.updateConfiguration(conf, dm);
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
     }
 
 }
