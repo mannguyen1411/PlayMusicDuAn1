@@ -5,6 +5,8 @@ import android.os.Environment;
 import android.support.annotation.ArrayRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.AdapterView;
@@ -25,27 +27,7 @@ public class PlayMusicActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_music);
         addControls();
-//Try catch fix lỗi force close khi không tìm thấy file nhạc
-        try {
-            final ArrayList<File> mySongs = findSongs(Environment.getExternalStorageDirectory());
 
-            items = new String[mySongs.size()];
-            for (int i = 0; i < mySongs.size(); i++) {
-                // toast(mySongs.get(i).getName().toString());
-                items[i] = mySongs.get(i).getName().toString().replace(".mp3", "").replace(".wav", "");
-            }
-
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.listsong_layout, R.id.textView2, items);
-            lv.setAdapter(adapter);
-            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    startActivity(new Intent(getApplication(), Controller.class).putExtra("pos", position).putExtra("songlist", mySongs).putExtra("title",mySongs.get(position).getName()));
-                }
-            });
-        } catch (Exception e){
-            Toast.makeText(getApplicationContext(),"Không tìm thấy file nhạc",Toast.LENGTH_SHORT).show();
-        }
     }
 
 
@@ -71,7 +53,41 @@ public class PlayMusicActivity extends AppCompatActivity {
         return al;
     }
 
-    public void toast(String text) {
-        Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG).show();
+    public void scanFile(){
+        try {
+            final ArrayList<File> mySongs = findSongs(Environment.getExternalStorageDirectory());
+
+            items = new String[mySongs.size()];
+            for (int i = 0; i < mySongs.size(); i++) {
+                items[i] = mySongs.get(i).getName().toString().replace(".mp3", "").replace(".wav", "");
+            }
+
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.listsong_layout, R.id.textView2, items);
+            lv.setAdapter(adapter);
+            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    startActivity(new Intent(getApplication(), Controller.class).putExtra("pos", position).putExtra("songlist", mySongs).putExtra("title",mySongs.get(position).getName()));
+                }
+            });
+        } catch (Exception e){
+            Toast.makeText(getApplicationContext(),"Không tìm thấy file nhạc",Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_option_scan,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.opt_scan:
+                scanFile();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

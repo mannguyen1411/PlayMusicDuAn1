@@ -16,49 +16,24 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-
-            <HorizontalScrollView
+            <android.support.v4.view.ViewPager
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
-
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="150dp">
-                    <ImageView
-                        android:layout_width="220dp"
-                        android:layout_height="match_parent"
-                        app:srcCompat="@drawable/slide"/>
-                    <ImageView
-                        android:layout_width="258dp"
-                        android:layout_height="match_parent"
-                        app:srcCompat="@drawable/slide2"/>
-                    <ImageView
-                        android:layout_width="260dp"
-                        android:layout_height="match_parent"
-                        app:srcCompat="@drawable/slide3"/>
-                </LinearLayout>
-            </HorizontalScrollView>
-
-
+                android:layout_height="160dp"
+                android:background="#5e7e79"
+                android:id="@+id/mainSlider">
+            </android.support.v4.view.ViewPager>
             <ImageButton
                 android:text="ListMusic"
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
+                android:layout_height="300dp"
                 android:id="@+id/btnlistMusic"
                 android:background="@drawable/banner1"
                 android:layout_weight="1" />
-
-            <com.facebook.share.widget.ShareButton
-                android:id="@+id/share_button"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="#4c66a3"
-                android:layout_gravity="center_horizontal"
-                android:layout_alignBaseline="@+id/login_button"
-                android:layout_alignBottom="@+id/login_button"
-                android:layout_alignParentEnd="true" />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/buttontest"
+                android:text="Buttontest"/>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

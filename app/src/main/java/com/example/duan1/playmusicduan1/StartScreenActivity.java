@@ -16,7 +16,7 @@ public class StartScreenActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    sleep(2500);
+                    sleep(100);
                     Intent intent = new Intent(StartScreenActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();

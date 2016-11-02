@@ -4,13 +4,18 @@
     android:id="@+id/activity_start_screen"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
+    android:background="@drawable/startscreen"
     tools:context="com.example.duan1.playmusicduan1.StartScreenActivity">
 
 
-    <ImageView
-        android:background="@drawable/startscreen1"
-        android:id="@+id/ima_startscreen"
+    <TextView
+        android:text="CLAST MUSIC"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        android:textSize="40dp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/textView3" />
 </RelativeLayout>

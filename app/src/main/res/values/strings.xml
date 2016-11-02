@@ -1,12 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Clast Music</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="action_settings">Cài đặt</string>
+    <string name="navigation_drawer_open">Mở thanh điều hướng</string>
+    <string name="navigation_drawer_close">Đóng thanh điều hướng</string>
     <string name="facebook_app_id">605006003015151</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment">Fragments trống</string>
 
+    <string name="reload">Tải lại</string>
+    <string name="scan">Quét</string>
+    <string name="share">Chia sẽ</string>
+    <string name="playlist">Danh sách nhạc</string>
+    <string name="settings">Cài đặt</string>
+    <string name="themecolor">Đổi giao diện</string>
+    <string name="changelang">Đổi ngôn ngữ</string>
+    <string name="sharefacebook">Chia sẽ Facebook</string>
+    <string name="sendfeedback">Gửi phản hồi</string>
+    <string name="about">Thông tin ứng dụng</string>
+    <string name="exit">Thoát</string>
+    <string name="done">Xong</string>
+    <string name="empty">Không tìm thấy file</string>
+    <string name="feedbackactivity">Gửi phản hồi</string>
+    <string name="loading">Đang tải</string>
+    <string name="wait">Xin chờ một lát</string>
+    <string name="favourite">Yêu thích</string>
+    <string name="line">Tùy chỉnh</string>
+
+    <string name="dialogtitle">Chọn ngôn ngữ</string>
+    <string name="select">Chọn</string>
+    <string name="cancel">Hủy</string>
+    <string name="restart">Khởi động lại để áp dụng cài đặt</string>
 
     <string name="menu_Japan">Japan</string>
     <string name="menu_VietNam">VietNam</string>

@@ -1,10 +1,14 @@
 package com.example.duan1.playmusicduan1;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.preference.PreferenceManager;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.view.ContextMenu;
 import android.view.MenuInflater;
 import android.view.View;
@@ -16,19 +20,28 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
-
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
 import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareButton;
+import com.facebook.share.widget.ShareDialog;
+
+import java.util.ArrayList;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     ImageView btnListMusic;
+    ViewPager viewPager;
+    CustomSlider customSlider;
+    ShareLinkContent content;
+    AlertDialog dialog;
+    Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +56,8 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        button=(Button)findViewById(R.id.buttontest);
+        registerForContextMenu(button);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -53,14 +68,15 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        ShareButton shareButton = (ShareButton) findViewById(R.id.share_button);
-        ShareLinkContent content = new ShareLinkContent.Builder()
+        content = new ShareLinkContent.Builder()
                 .setContentUrl(Uri.parse("https://www.dropbox.com/s/q13tunnn350dp75/ClastMusic.apk?dl=0"))
                 .setImageUrl(Uri.parse("https://s4.postimg.org/5by4e7wot/ic_launcher.png"))
                 .setContentTitle("Ứng dụng nghe nhạc Clast Music")
                 .setContentDescription("Hãy cài đặt và sử dụng ứng dụng nghe nhạc Clast Music, simple")
                 .build();
-        shareButton.setShareContent(content);
+
+
+
     }
 
     @Override
@@ -99,6 +115,8 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
+        Dialog dialog = onCreateDialogSingleChoice();
+
         int id = item.getItemId();
 
         if (id == R.id.nav_listmusic) {
@@ -106,14 +124,14 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_change_theme) {
 
         } else if (id == R.id.nav_change_AE) {
-
-
+            dialog.show();
         } else if (id == R.id.nav_favorites) {
 
         } else if (id == R.id.nav_share) {
-
+            ShareDialog.show(MainActivity.this, content);
         } else if (id == R.id.nav_send) {
-
+            Intent i =new Intent(MainActivity.this,FeedbackActivity.class);
+            startActivity(i);
         } else if (id == R.id.nav_about_app) {
 
         } else if (id == R.id.nav_exit) {
@@ -127,6 +145,8 @@ public class MainActivity extends AppCompatActivity
     }
 
 
+
+
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
@@ -136,22 +156,25 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
-        int idcontext = item.getItemId();
 
-        if(idcontext == R.id.menu_English){
-
-        }else  if( idcontext == R.id.menu_VietNam){
-
-        }else if(idcontext == R.id.menu_Janpan){
-
-        }else if(idcontext == R.id.menu_France){
-
+        switch (item.getItemId()){
+            case R.id.menu_English:
+                break;
+            case R.id.menu_France:
+                break;
+            case R.id.menu_Janpan:
+                break;
+            case R.id.menu_VietNam:
+                break;
         }
         return super.onContextItemSelected(item);
     }
 
     private void addControls() {
         btnListMusic = (ImageView) findViewById(R.id.btnlistMusic);
+        viewPager=(ViewPager)findViewById(R.id.mainSlider);
+        customSlider=new CustomSlider(this);
+        viewPager.setAdapter(customSlider);
     }
 
     private void addEvents() {
@@ -167,6 +190,42 @@ public class MainActivity extends AppCompatActivity
         Toast.makeText(MainActivity.this, "Load List Music", Toast.LENGTH_LONG).show();
         Intent i = new Intent(MainActivity.this, PlayMusicActivity.class);
         startActivity(i);
+    }
+
+    public AlertDialog onCreateDialogSingleChoice() {
+
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final CharSequence[] array = {"English", "Vietnam", "Korea"};
+        AlertDialog.Builder builder1 = builder.setTitle(R.string.changelang).setSingleChoiceItems(array, 0, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which) {
+                    case 0:
+                        Toast.makeText(getApplicationContext(), "English", Toast.LENGTH_SHORT).show();
+                        break;
+                    case 1:
+                        Toast.makeText(getApplicationContext(), "Vietnam", Toast.LENGTH_SHORT).show();
+                        break;
+                    case 2:
+                        Toast.makeText(getApplicationContext(), "Korea", Toast.LENGTH_SHORT).show();
+                        break;
+
+                }
+            }
+        })
+                .setPositiveButton(R.string.select, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+
+                    }
+                })
+                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                    }
+                });
+
+        return builder.create();
     }
 
 }

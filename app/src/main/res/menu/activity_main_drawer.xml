@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bwq="http://schemas.android.com/apk/res-auto">
 
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_listmusic"
             android:icon="@drawable/listmusic"
-            android:title="Play list" />
+            android:title="@string/playlist" />
         <item
             android:id="@+id/nav_favorites"
             android:icon="@drawable/star"
-            android:title="Favorites" />
+            android:title="@string/favourite" />
         <item
             android:id="@+id/nav_change_theme"
             android:icon="@drawable/changetheme"
-            android:title="Theme Color" />
+            android:title="@string/themecolor" />
 
         <item
             android:id="@+id/nav_change_AE"
             android:icon="@drawable/changelanguage"
-            android:title="Change Language" />
+            android:title="@string/changelang" />
         <!--<item-->
         <!--android:id="@+id/nav_slideshow"-->
         <!--android:icon="@drawable/ic_menu_slideshow"-->
@@ -26,27 +27,27 @@
 
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="@string/line">
         <menu>
 
             <item
                 android:id="@+id/nav_share"
                 android:icon="@drawable/ic_menu_share"
-                android:title="Share Facebook" />
+                android:title="@string/sharefacebook"/>
             <item
                 android:id="@+id/nav_send"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:icon="@drawable/mail"
-                android:title="Send Feedback" />
+                android:title="@string/sendfeedback" />
             <item
                 android:id="@+id/nav_about_app"
                 android:icon="@drawable/infomationapp"
-                android:title="About" />
+                android:title="@string/about" />
             <item
                 android:id="@+id/nav_exit"
                 android:icon="@drawable/exit"
-                android:title="Exit" />
+                android:title="@string/exit" />
         </menu>
     </item>
 
